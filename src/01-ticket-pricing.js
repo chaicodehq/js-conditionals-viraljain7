@@ -24,4 +24,32 @@
  */
 export function getTicketPrice(age, isWeekend) {
   // Your code here
+
+  let ticketPrice = 0;
+
+  if (age < 0 || isNaN(age)) {
+    // If age is negative or not a number, return -1
+    return -1;
+  }
+
+  if (age < 13) {
+    // Children (0–12): $8
+    ticketPrice += 8;
+  } else if (age < 18) {
+    // Teens (13–17): $12
+    ticketPrice += 12;
+  } else if (age < 60) {
+    // Adults (18–59): $15
+    ticketPrice += 15;
+  } else {
+    // Seniors (60+): $10
+    ticketPrice += 10;
+  }
+
+  if (isWeekend) {
+    // Weekend Surcharge: $3 (when isWeekend is true)
+    ticketPrice += 3;
+  }
+
+  return ticketPrice;
 }
