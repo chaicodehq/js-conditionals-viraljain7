@@ -27,4 +27,39 @@
  */
 export function checkPasswordStrength(password) {
   // Your code here
+
+  let patternLowercase = /[a-z]/; 
+  let patternUppercase = /[A-Z]/; 
+  let patternNumber = /[0-9]/; 
+  let patternSpecialCharRegex = /[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/;
+
+  let res = ["weak", "weak", "medium", "medium", "strong", "very strong"];
+  let criteriaLevel = 0;
+
+  if (password === "" || typeof password !== "string") {
+    return res[criteriaLevel];
+  }
+
+  if (password.length >= 8) {
+    criteriaLevel++;
+    console.log(criteriaLevel);
+  }
+  if (patternLowercase.test(password)) {
+    criteriaLevel++;
+    console.log(criteriaLevel);
+  }
+  if (patternUppercase.test(password)) {
+    criteriaLevel++;
+    console.log(criteriaLevel);
+  }
+  if (patternNumber.test(password)) {
+    criteriaLevel++;
+    console.log(criteriaLevel);
+  }
+
+  if (patternSpecialCharRegex.test(password)) {
+    criteriaLevel++;
+  }
+
+  return res[criteriaLevel];
 }
