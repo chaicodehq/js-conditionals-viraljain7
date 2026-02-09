@@ -60,6 +60,6 @@ export function checkPasswordStrength(password) {
   if (patternSpecialCharRegex.test(password)) {
     criteriaLevel++;
   }
-
+   // regex understanding
   return res[criteriaLevel];
 }

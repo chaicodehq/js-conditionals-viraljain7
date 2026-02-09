@@ -43,6 +43,6 @@ export function calculateTax(income) {
   } else {
     tax = (income - 70000) * 0.3 + 10000;
   }
-
+  // income tax understanding
   return tax;
 }
