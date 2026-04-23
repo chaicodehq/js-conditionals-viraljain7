@@ -31,47 +31,46 @@
  * @returns {number} Total price or -1 for invalid input
  */
 export function calculateCoffeePrice(size, type, extras = {}) {
-  // Your code here
-
-  let totalPrice = 0;
-
-  let sizeTypes = ["small", "medium", "large"];
   let coffeeTypes = ["regular", "latte", "cappuccino", "mocha"];
+  let coffeeSizeTypes = ["small", "medium", "large"];
 
-  if (!sizeTypes.includes(size)) {
-    return -1;
-  }
-  if (!coffeeTypes.includes(type)) {
-    return -1;
-  }
+  if (!coffeeSizeTypes.includes(size)) return -1;
+  if (!coffeeTypes.includes(type)) return -1;
 
-  if (size === "small") {
-    totalPrice = 3;
-  } else if (size === "medium") {
-    totalPrice = 4;
-  } else {
-    totalPrice = 5;
-  }
+  let { whippedCream, extraShot } = extras;
 
+  let price;
 
-  if(type==="regular"){
-    totalPrice+=0;
-  }else   if(type==="latte"){
-    totalPrice+=1;
-  }else   if(type==="cappuccino"){
-    totalPrice+=1.5;
-  }else  {
-    totalPrice+=2;
+  switch (size) {
+    case "small":
+      price = 3;
+      break;
+    case "medium":
+      price = 4;
+      break;
+
+    default:
+      price = 5;
+      break;
   }
 
+  switch (type) {
+    case "regular":
+      price += 0.0;
+      break;
+    case "latte":
+      price += 1.0;
+      break;
+    case "cappuccino":
+      price += 1.5;
+      break;
+    case "mocha":
+      price += 2.0;
+      break;
+  }
 
-  if(extras.whippedCream){
-    totalPrice+=0.5;
-  }
-  if(extras.extraShot){
-    totalPrice+=0.75;
-  }
-  return totalPrice;
+  if (whippedCream) price += 0.5;
+  if (extraShot) price += 0.75;
+
+  return price;
 }
-
-

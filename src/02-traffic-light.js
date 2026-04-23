@@ -10,7 +10,7 @@
  *   - "yellow"       → "SLOW DOWN"
  *   - "red"          → "STOP"
  *   - "flashing red" → "STOP AND PROCEED WITH CAUTION"
- *   - anything else  → "INVALID SIGNAL"
+ *   - anything else  →cmd= "INVALID SIGNAL"
  *
  * Rules:
  *   - The function should be case-insensitive
@@ -22,36 +22,30 @@
  * @returns {string} The driving action to take
  */
 export function getTrafficAction(color) {
+  let lowerCaseColor = color.toLocaleLowerCase();
 
-  //  case-insensitive
-  let colorStr = color.toLowerCase();
-  let signal;
+  let cmd;
 
-  switch (colorStr) {
+  switch (lowerCaseColor) {
     case "green":
-      // "green"        → "GO"
-      signal = "GO";
+      cmd = "GO";
       break;
 
     case "yellow":
-      // "yellow"       → "SLOW DOWN"
-      signal = "SLOW DOWN";
+      cmd = "SLOW DOWN";
       break;
 
     case "red":
-      // "red"          → "STOP"
-      signal = "STOP";
+      cmd = "STOP";
       break;
-
     case "flashing red":
-      // "flashing red" → "STOP AND PROCEED WITH CAUTION"
-      signal = "STOP AND PROCEED WITH CAUTION";
+      cmd = "STOP AND PROCEED WITH CAUTION";
       break;
 
     default:
-      // anything else  → "INVALID SIGNAL"
-      signal = "INVALID SIGNAL";
+      cmd = "INVALID SIGNAL";
+      break;
   }
 
-  return signal;
+  return cmd;
 }

@@ -16,31 +16,27 @@
  *   - temp >= 5 and raining   → "Cold and wet - best to stay indoors"
  *   - temp < 5                → "Too cold - stay warm indoors"
  *
- * @param {number} temperature - Temperature in Celsius
+ * @param {number} temp - Temperature in Celsius
  * @param {boolean} isRaining - Whether it's currently raining
  * @returns {string} The weather advisory message
  */
-export function getWeatherAdvice(temperature, isRaining) {
+export function getWeatherAdvice(temp, isRaining) {
   // Your code here
-  //
-  let weather;
-  if (temperature >= 35) {
-    weather = "Too hot for hiking - stay indoors and hydrate";
-  } else if (temperature >= 25 && !isRaining) {
-    weather="Great weather for hiking - don't forget sunscreen";
-  } else if (temperature >= 25 && isRaining) {
-    weather="Warm but rainy - consider indoor activities";
-
-  } else if (temperature >= 15 && !isRaining) {
-    weather="Perfect hiking weather - enjoy the trails";
-  } else if (temperature >= 15 && isRaining) {
-    weather="Cool and rainy - bring waterproof gear if hiking";
-  } else if (temperature >= 5 && !isRaining) {
-    weather="Chilly - wear layers for your hike";
-  } else if (temperature >= 5 && isRaining) {
-    weather="Cold and wet - best to stay indoors";
-  } else if (temperature < 5) {
-    weather="Too cold - stay warm indoors";
+  if (temp >= 35) {
+    return "Too hot for hiking - stay indoors and hydrate";
+  } else if (temp >= 25 && isRaining) {
+    return "Warm but rainy - consider indoor activities";
+  } else if (temp >= 25) {
+    return "Great weather for hiking - don't forget sunscreen";
+  } else if (temp >= 15 && isRaining) {
+    return "Cool and rainy - bring waterproof gear if hiking";
+  } else if (temp >= 15) {
+    return "Perfect hiking weather - enjoy the trails";
+  } else if (temp >= 5 && isRaining) {
+    return "Cold and wet - best to stay indoors";
+  } else if (temp >= 5) {
+    return "Chilly - wear layers for your hike";
+  } else {
+    return "Too cold - stay warm indoors";
   }
-  return weather;
 }

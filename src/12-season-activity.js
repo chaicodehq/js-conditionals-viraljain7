@@ -30,54 +30,42 @@
  * @param {number} temperature - Current temperature in Celsius
  * @returns {{ season: string, activity: string } | null}
  */
+
+
 export function getSeasonActivity(month, temperature) {
-  // Your code here
+  const season = monthDecider(month);
 
-  if (month < 1 || month > 12) {
-    return null;
+  // invalid month
+  if (!season) return null;
+
+  let activity = "";
+
+  switch (season) {
+    case "Winter":
+      activity = temperature < 0 ? "skiing" : "ice skating";
+      break;
+
+    case "Spring":
+      activity = temperature > 20 ? "hiking" : "museum visit";
+      break;
+
+    case "Summer":
+      activity = temperature > 35 ? "swimming" : "cycling";
+      break;
+
+    case "Autumn":
+      activity = temperature > 15 ? "nature walk" : "reading at a cafe";
+      break;
   }
 
-  let season = monthDecider(month);
-  let activity;
-  if (season === "Winter" && temperature < 0) {
-    activity = "skiing";
-  } else if (season === "Winter" && temperature >= 0) {
-    activity = "ice skating";
-  } else if (season === "Spring" && temperature > 20) {
-    activity = "hiking";
-  } else if (season === "Spring" && temperature <= 20) {
-    activity = "museum visit";
-  } else if (season === "Summer" && temperature > 35) {
-    activity = "swimming";
-  } else if (season === "Summer" && temperature <= 35) {
-    activity = "cycling";
-  } else if (season === "Autumn" && temperature > 15) {
-    activity = "nature walk";
-  } else if (season === "Autumn" && temperature <= 15) {
-    activity = "reading at a cafe";
-  }
-
-  return {
-    season,
-    activity,
-  };
+  return { season, activity };
 }
 
 function monthDecider(month) {
-  switch (month) {
-    case 12:
-    case 1:
-    case 2:
-      return "Winter";
-    case 3:
-    case 4:
-    case 5:
-      return "Spring";
-    case 6:
-    case 7:
-    case 8:
-      return "Summer";
-    default:
-      return "Autumn";
-  }
+  if (month < 1 || month > 12) return null;
+
+  if ([12, 1, 2].includes(month)) return "Winter";
+  if ([3, 4, 5].includes(month)) return "Spring";
+  if ([6, 7, 8].includes(month)) return "Summer";
+  if ([9, 10, 11].includes(month)) return "Autumn";
 }

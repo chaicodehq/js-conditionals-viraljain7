@@ -17,8 +17,8 @@
  *   - "bus":        $60
  *
  * Rules:
- *   - Partial hours are rounded UP (e.g., 1.5 hours → 2 hours)
  *   - The fee should never exceed the daily maximum
+ *   - Partial hours are rounded UP (e.g., 1.5 hours → 2 hours)
  *   - If hours is 0 or negative, return -1
  *   - If vehicleType is not "car", "motorcycle", or "bus", return -1
  *
@@ -40,51 +40,67 @@ export function calculateParkingFee(hours, vehicleType) {
   // Loops: https://classroom.github.com/a/pZ1cSgDU
   // Functions: https://classroom.github.com/a/o2RfZZTy
 
-  let parkingFees = 0;
+  let vehicleTypeOptions = ["car", "motorcycle", "bus"];
 
-  let vehicleRange = ["car", "motorcycle", "bus"];
-  if (!vehicleRange.includes(vehicleType)) return -1;
-  hours = Math.ceil(hours);
+  if (!vehicleTypeOptions.includes(vehicleType)) return -1;
 
-  if (hours < 1) return -1;
+  let fullHours = Math.ceil(hours);
+  if (hours <= 0) return -1;
 
+  let parkingFee = 0;
   if (vehicleType === "car") {
-    while (hours > 0) {
-      if (hours > 1) {
-        parkingFees += 3;
-      } else {
-        parkingFees += 5;
+    do {
+      if (fullHours === 1) parkingFee += 5;
+      else {
+        parkingFee += 3;
       }
+      fullHours--;
+    } while (fullHours > 0);
 
-      if (parkingFees > 30) parkingFees = 30;
-      hours--;
-    }
+    parkingFee = parkingFee > 30 ? 30 : parkingFee;
   } else if (vehicleType === "motorcycle") {
-    while (hours > 0) {
-      if (hours > 1) {
-        parkingFees += 2;
-      } else {
-        parkingFees += 3;
+    do {
+      if (fullHours === 1) parkingFee += 3;
+      else {
+        parkingFee += 2;
       }
+      fullHours--;
+    } while (fullHours > 0);
 
-      if (parkingFees > 18) parkingFees = 18;
-      hours--;
-    }
+    parkingFee = parkingFee > 18 ? 18 : parkingFee;
   } else {
-    while (hours > 0) {
-      if (hours > 1) {
-        parkingFees += 7;
-      } else {
-        parkingFees += 10;
+    do {
+      if (fullHours === 1) parkingFee += 10;
+      else {
+        parkingFee += 7;
       }
+      fullHours--;
+    } while (fullHours > 0);
 
-      if (parkingFees > 60) parkingFees = 60;
-      hours--;
-    }
+    parkingFee = parkingFee > 60 ? 60 : parkingFee;
   }
 
-  console.log(parkingFees);
-  return parkingFees;
+  return parkingFee;
 }
 
 calculateParkingFee(10, "bus");
+
+// export function calculateParkingFee(hours, vehicleType) {
+//   if (hours <= 0) return -1;
+
+//   hours = Math.ceil(hours);
+
+//   if (vehicleType === "car") {
+//     return Math.min(5 + (hours - 1) * 3, 30);
+//   }
+
+//   if (vehicleType === "motorcycle") {
+//     return Math.min(3 + (hours - 1) * 2, 18);
+//   }
+
+//   if (vehicleType === "bus") {
+//     return Math.min(10 + (hours - 1) * 7, 60);
+//   }
+
+//   return -1;
+// }
